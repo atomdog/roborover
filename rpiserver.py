@@ -21,7 +21,7 @@ def locatehost(hostname):
             print("Attempting to locate base station again in 5 seconds.")
             time.sleep(5)
 
-bip = locatehost("Machine")
+bip = ""
 opport = 5005
 sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 connectionsucc=False
@@ -31,12 +31,14 @@ try:
     print("Port opened. Enabling reception.")
 except:
     print("Socket binding failed")
-if(connectionsucc==True):
 
+if(connectionsucc==True):
     while(True):
         data, addr = sock.recvfrom(1024)
         print("received message:", data)
-        if(data=="w"):
+        if(data=='w'):
             GPIO.output(18, GPIO.HIGH)
             GPIO.output(24, GPIO.HIGH)
-        GPIO.cleanup()
+        if(data=='0'):
+            GPIO.cleanup()
+            exit()
