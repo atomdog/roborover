@@ -40,8 +40,9 @@ if(connectionsucc==True):
             GPIO.cleanup()
             exit()
         datalist = [int(data[0:2]), int(data[2:4]),int(data[4:6]), int(data[6:8]), int(data[8]), int(data[9]), int(data[10]), int(data[11])]
-        for x in range(0, 3):
-            if(datalist[x+5]==0):
-                GPIO.output(datalist[x], GPIO.LOW)
-            elif(datalist[x+5]==0):
-                GPIO.output(datalist[x], GPIO.LOW)
+        for x in range(5, 9):
+            if(datalist[x]==0):
+                GPIO.output(datalist[x-4], GPIO.LOW)
+        for x in range(5, 9):
+            elif(datalist[x]==1):
+                GPIO.output(datalist[x-4], GPIO.HIGH)
