@@ -36,26 +36,12 @@ if(connectionsucc==True):
     while(True):
         data, addr = sock.recvfrom(1024)
         print("received message:", data)
-        if(data=='w'):
-            GPIO.output(15, GPIO.HIGH)
-            GPIO.output(23, GPIO.HIGH)
-            GPIO.output(18, GPIO.LOW)
-            GPIO.output(24, GPIO.LOW)
-        if(data=="s"):
-            GPIO.output(18, GPIO.HIGH)
-            GPIO.output(24, GPIO.HIGH)
-            GPIO.output(15, GPIO.LOW)
-            GPIO.output(23, GPIO.LOW)
-        if(data="a"):
-            GPIO.output(18, GPIO.HIGH)
-            GPIO.output(23, GPIO.HIGH)
-            GPIO.output(15, GPIO.LOW)
-            GPIO.output(24, GPIO.LOW)
-        if(data="s"):
-            GPIO.output(15, GPIO.HIGH)
-            GPIO.output(23, GPIO.HIGH)
-            GPIO.output(18, GPIO.LOW)
-            GPIO.output(24, GPIO.LOW)
         if(data=='0'):
             GPIO.cleanup()
             exit()
+        datalist = [int(data[0:2]), int(data[2:4]),int(data[4:6]), int(data[6:8]), int(data[8]), int(data[9]), int(data[10]), int(data[11])]
+        for x in range(0, 3):
+            if(datalist[x+5]==0):
+                GPIO.output(datalist[x], GPIO.LOW)
+            elif(datalist[x+5]==0):
+                GPIO.output(datalist[x], GPIO.LOW)
